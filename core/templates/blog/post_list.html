@@ -8,7 +8,10 @@
 <body>
     <div>
         {% for post in posts %}
-        <p>{{post.id}} - {{post.title}}</p>
+        <p>{{post.id}} - {{post.title}} 
+              <a href="{% url 'blog:post_datail' pk=post.id %}">detail</a>
+              <a href="{% url 'blog:post_edit' pk=post.id %}">edit</a>
+              <a href="{% url 'blog:post_delete' pk=post.id %}">del</a></p>
         {% endfor %}
         <div class="pagination">
 
