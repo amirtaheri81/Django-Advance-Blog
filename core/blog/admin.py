@@ -4,6 +4,7 @@ from .models import Post, Category
 
 class PostAdmin(admin.ModelAdmin):
         list_display = ('title', 'status', 'author', 'create_date', 'update_date')
+        list_editable = ['status']
 
 class CategoryAdmin(admin.ModelAdmin):
         list_display = ('name',)
