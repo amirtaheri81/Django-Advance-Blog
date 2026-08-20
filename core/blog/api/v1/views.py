@@ -45,22 +45,20 @@ def postDetail(request, pk):
     return Response(ser_data.data)
     """
     
+class PostListView(APIView):
+    posts = Post.objects.filter(status=True)
+    permission_classes = [IsAuthenticatedOrReadOnly]
     
-# class PostListView(APIView):
-#     posts = Post.objects.filter(status=True)
-#     permission_classes = [IsAuthenticatedOrReadOnly]
-    
-#     def get(self, request):
-#         ser_data = PostSerializer(self.posts, many=True) 
-#         return Response(ser_data.data)
+    def get(self, request):
+        ser_data = PostSerializer(self.posts, many=True) 
+        return Response(ser_data.data)
 
 
-#     def post(self, request):
-#         ser_data = PostSerializer(data=request.data)
-#         ser_data.is_valid(raise_exception=True)
-#         ser_data.save()
-#         return Response(ser_data.data)
-
+    def post(self, request):
+        ser_data = PostSerializer(data=request.data)
+        ser_data.is_valid(raise_exception=True)
+        ser_data.save()
+        return Response(ser_data.data)
 
 
 class PostDetailView(APIView):
@@ -87,7 +85,6 @@ class PostDetailView(APIView):
         post.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     
-    
 
 class PostListView(generics.ListCreateAPIView):
     queryset = Post.objects.filter(status=True)
@@ -98,9 +95,36 @@ class PostListView(generics.ListCreateAPIView):
     #     queryset = Post.objects.filter(status=True)
     #     return queryset
 
+
 class PostDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PostSerializer
     queryset = Post.objects.filter(status=True)
+    permission_classes = [IsAuthenticatedOrReadOnly]
     
     
-# class PostViewSet()
+class PostViewSet(viewsets.ViewSet):
+    queryset = Post.objects.filter(status=True)
+    serializer_class = PostSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    
+    def list(self, request):
+        ser_data = self.serializer_class(self.queryset, many=True)
+        return Response(ser_data.data)
+
+    def retrieve(self, request, pk=None):
+        post_object = get_object_or_404(self.queryset, pk=pk)
+        ser_data = self.serializer_class(post_object)
+        return Response(ser_data.data)
+
+   
+    def create(self, request):
+        pass
+
+    def update(self, request, pk=None):
+        pass
+
+    def partial_update(self, request, pk=None):
+        pass
+
+    def destroy(self, request, pk=None):
+        pass
