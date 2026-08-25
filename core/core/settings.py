@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # external
     "rest_framework",
+    'django_filters',
     # Internal
     'accounts',
     'blog',   
@@ -131,3 +132,9 @@ STATICFILES_DIRS = [
 
 # user manager config
 AUTH_USER_MODEL = "accounts.User"
+
+
+# filtering api
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}

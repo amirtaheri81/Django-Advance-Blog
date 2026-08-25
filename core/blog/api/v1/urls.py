@@ -5,9 +5,9 @@ from . import views
 app_name = 'api-v1' 
 
 
-
 router = routers.DefaultRouter()
-router.register('post', views.PostViewSet)
+router.register('post', views.PostViewSet, basename='post')
+router.register('category', views.CategoryViewSet, basename='category')
 urlpatterns = router.urls
 
 
