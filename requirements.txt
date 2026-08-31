@@ -1,5 +1,11 @@
+# general modules
 django == 6.0.7
 Pillow
 djangorestframework
+
+# third party modules
 markdown
 django-filter
+drf-spectacular
+
+# deploment module

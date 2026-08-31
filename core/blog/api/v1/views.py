@@ -9,6 +9,7 @@ from .serializers import PostSerializer, CategorySerializer
 from django.shortcuts import get_object_or_404
 from .permissions import IsOwnerOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
+from .paginations import DefaultPagination
 
 """
 @api_view(['GET', 'POST'])
@@ -109,10 +110,13 @@ class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
     permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ['category', 'author', 'status']
+    filterset_fields = {'category':['exact', 'in'], 'author':['exact'], 'status':['exact']}
     search_fields = ['title', 'author__user__email']
     ordering_fields = ['publish_date']
-
+    pagination_class = DefaultPagination
+    
+    
+    
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
