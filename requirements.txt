@@ -7,6 +7,7 @@ djangorestframework
 # third party modules
 markdown
 django-filter
+drf-yasg[validation]
 drf-spectacular
 drf-spectacular[sidecar]
 # deploment module

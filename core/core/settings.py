@@ -37,11 +37,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    
     # external
+    'drf_yasg',
     "rest_framework",
     'django_filters',
-    'drf_spectacular',
-    'drf_spectacular_sidecar',
+    # 'drf_spectacular',
+    # 'drf_spectacular_sidecar',
+    
     # Internal
     'accounts',
     'blog',   

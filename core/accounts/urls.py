@@ -1,6 +1,7 @@
 from django.urls import path, include
 
-app_name = 'accounts'
+
+app_name = 'api-v1'
 
 urlpatterns = [
     path('', include('django.contrib.auth.urls')),
